@@ -1,13 +1,11 @@
-import { PullRequestEssentials, RepoWithPulls } from "./utils/interfaces";
-
 const path = require("path");
 const fs = require("fs");
 import { Octokit } from "@octokit/rest";
 import { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods/dist-types/generated/parameters-and-response-types";
+import { PullRequestEssentials } from "./utils/interfaces";
 
-const pullsDataFile = path.join(__dirname, "./pulls.json");
-const config = require("./config.json");
-const pullsData: RepoWithPulls[] = require("./pulls.json");
+const pullsDataFile = path.join(__dirname, "../pulls.json");
+const config = require(path.join(__dirname, "../config.json"));
 const octokit = new Octokit({ auth: config.auth });
 
 async function getRepos(
@@ -41,7 +39,7 @@ async function getAllRepos() {
   return records;
 }
 
-async function getAllPRs() {
+export async function getAllPRs() {
   let records = (await getAllRepos()).filter(
     (v, i, self) => self.indexOf(v) === i
   );
@@ -73,5 +71,7 @@ async function getAllPRs() {
   ).filter((p) => p != null && p.pulls.length > 0);
 
   const deduped = prs.filter((item, index) => prs.indexOf(item) === index);
-  fs.writeFileSync(pullsDataFile, JSON.stringify(deduped));
+  fs.writeFileSync(pullsDataFile, JSON.stringify(deduped, null, 2));
 }
+
+(async () => await getAllPRs())();

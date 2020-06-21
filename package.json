@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "getPulls": "ts-node src/getPulls.ts",
+    "pulls:get": "ts-node src/getPulls.ts",
     "start": "npm run getPulls && npm run countPulls",
-    "countPulls": "ts-node src/countPulls.ts"
+    "pulls:count": "ts-node src/countPulls.ts"
   },
   "keywords": [],
   "author": "",
