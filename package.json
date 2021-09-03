@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "pulls:get": "ts-node src/getPulls.ts",
-    "start": "npm run getPulls && npm run countPulls",
+    "start": "npm run pulls:get && npm run pulls:count",
     "pulls:count": "ts-node src/countPulls.ts"
   },
   "keywords": [],

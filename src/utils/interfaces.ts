@@ -9,3 +9,8 @@ export interface PullRequestEssentials {
   openedBy: string;
   requestedReviewers: string[];
 }
+
+export interface Pull {
+  repo: string;
+  pulls: PullRequestEssentials[];
+}
